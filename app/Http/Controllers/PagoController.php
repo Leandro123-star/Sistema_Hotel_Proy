@@ -2,63 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pago;
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index() {
+        $pagos = Pago::all();
+        return view('pagos.index', compact('pagos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('pagos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        Pago::create($request->all());
+        return redirect()->route('pagos.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function edit($id) {
+        $pago = Pago::findOrFail($id);
+        return view('pagos.edit', compact('pago'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $pago = Pago::findOrFail($id);
+        $pago->update($request->all());
+        return redirect()->route('pagos.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id) {
+        Pago::destroy($id);
+        return redirect()->route('pagos.index');
     }
 }

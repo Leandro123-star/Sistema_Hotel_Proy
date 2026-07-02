@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Habitacion extends Model
 {
+    protected $table = 'habitaciones';
      protected $primaryKey = 'id_habitacion';
     protected $fillable = ['numero', 'piso', 'capacidad', 'precio_noche', 'estado', 'estado', 'id_tipo'];
 

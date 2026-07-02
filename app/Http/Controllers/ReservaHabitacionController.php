@@ -2,63 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReservaHabitacion;
 use Illuminate\Http\Request;
 
 class ReservaHabitacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function index() {
+        $detalles = ReservaHabitacion::all();
+        return view('reserva_habitacion.index', compact('detalles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('reserva_habitacion.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        ReservaHabitacion::create($request->all());
+        return redirect()->route('reserva_habitacion.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    public function edit($id) {
+        $detalle = ReservaHabitacion::findOrFail($id);
+        return view('reserva_habitacion.edit', compact('detalle'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $detalle = ReservaHabitacion::findOrFail($id);
+        $detalle->update($request->all());
+        return redirect()->route('reserva_habitacion.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id) {
+        ReservaHabitacion::destroy($id);
+        return redirect()->route('reserva_habitacion.index');
     }
 }

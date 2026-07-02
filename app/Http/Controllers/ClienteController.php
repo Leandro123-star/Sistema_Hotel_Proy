@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -11,7 +12,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+         $clientes = Cliente::all();
+        return view('clientes.index', compact('clientes'));
     }
 
     /**
@@ -19,7 +21,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+          return view('clientes.create');
     }
 
     /**
@@ -27,7 +29,9 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cliente::create($request->all());
+        return redirect()->route('clientes.index')
+                         ->with('success','Cliente registrado correctamente');
     }
 
     /**
@@ -43,7 +47,8 @@ class ClienteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+            $cliente = Cliente::findOrFail($id);
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
@@ -51,7 +56,10 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $cliente = Cliente::findOrFail($id);
+        $cliente->update($request->all());
+        return redirect()->route('clientes.index')
+                         ->with('success','Cliente actualizado correctamente');
     }
 
     /**
@@ -59,6 +67,10 @@ class ClienteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Cliente::destroy($id);
+        return redirect()->route('clientes.index')
+                         ->with('success','Cliente eliminado correctamente');
     }
+
+    
 }

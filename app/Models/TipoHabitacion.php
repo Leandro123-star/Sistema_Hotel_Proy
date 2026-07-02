@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoHabitacion extends Model
 {
+    protected $table = 'tipos_habitacion';
      protected $primaryKey = 'id_tipo';
     protected $fillable = ['nombre_tipo', 'descripcion'];
 
