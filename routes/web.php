@@ -10,15 +10,13 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ReservaHabitacionController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\PanelController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/panel', function () {
-    return view('panel.index'); // o la vista que quieras mostrar
-})->name('panel');
-
+Route::get('/panel', [PanelController::class, 'index'])->name('panel');
 Route::resource('clientes', ClienteController::class);
 Route::resource('habitaciones', HabitacionController::class);
 Route::resource('tipos', TipoHabitacionController::class);
