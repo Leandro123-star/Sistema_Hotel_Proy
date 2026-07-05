@@ -11,6 +11,6 @@ class TipoHabitacion extends Model
     protected $fillable = ['nombre_tipo', 'descripcion'];
 
     public function habitaciones(){
-        return $this->hasMany(Habitacion::class, 'id_tipo');
+        return $this->hasMany(Habitacion::class, 'id_tipo', 'id_tipo');
     }
 }
