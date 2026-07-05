@@ -36,16 +36,27 @@ class ReservaController extends Controller
 }
 
 
-    public function edit($id) {
-        $reserva = Reserva::findOrFail($id);
-        return view('reservas.edit', compact('reserva'));
-    }
+   public function edit($id) {
+    $reserva = Reserva::with('habitaciones')->findOrFail($id);
+    $clientes = Cliente::all();
+    $empleados = Empleado::all();
+    $habitaciones = Habitacion::all();
+    return view('reservas.edit', compact('reserva','clientes','empleados','habitaciones'));
+}
 
     public function update(Request $request, $id) {
-        $reserva = Reserva::findOrFail($id);
-        $reserva->update($request->all());
-        return redirect()->route('reservas.index');
-    }
+    $reserva = Reserva::findOrFail($id);
+
+    $reserva->update($request->only([
+        'id_cliente','id_empleado','fecha_reserva','fecha_entrada','fecha_salida','estado'
+    ]));
+
+    // Actualizar habitaciones asociadas
+    $reserva->habitaciones()->sync($request->habitaciones);
+
+    return redirect()->route('reservas.index')->with('success','Reserva actualizada correctamente');
+}
+
 
     public function destroy($id) {      
         Reserva::destroy($id);

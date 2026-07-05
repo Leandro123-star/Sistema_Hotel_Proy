@@ -20,7 +20,15 @@
         <i class="fa-solid fa-gauge-high w-5 h-5 mr-2 text-white"></i>
         Panel
     </a>
-
+    <!-- Usuarios (solo administrador) -->
+@auth
+    @if(auth()->user()->rol === 'administrador')
+        <a href="{{ route('usuarios.index') }}" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">
+            <i class="fa-solid fa-user-shield w-5 h-5 mr-2 text-white"></i>
+            Usuarios
+        </a>
+    @endif
+@endauth
     <!-- Clientes -->
     <a href="{{ route('clientes.index') }}" class="flex items-center px-3 py-2 rounded hover:bg-gray-700">
         <i class="fa-solid fa-users w-5 h-5 mr-2 text-white"></i>

@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pago;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
 {
     public function index() {
-        $pagos = Pago::all();
-        return view('pagos.index', compact('pagos'));
+       $pagos = Pago::with('reserva')->get();
+    return view('pagos.index', compact('pagos'));
     }
 
     public function create() {
-        return view('pagos.create');
-    }
+    $reservas = Reserva::with('cliente')->get();
+    return view('pagos.create', compact('reservas'));
+}
 
     public function store(Request $request) {
         Pago::create($request->all());

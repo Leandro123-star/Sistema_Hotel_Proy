@@ -24,5 +24,7 @@ Route::resource('reservas', ReservaController::class);
 Route::resource('pagos', PagoController::class);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('reserva_habitacion', ReservaHabitacionController::class);
-Route::resource('usuarios', UsuarioController::class);
+Route::resource('usuarios', UsuarioController::class)
+    ->middleware('checkrole');
+
 
