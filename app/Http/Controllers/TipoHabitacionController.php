@@ -16,21 +16,35 @@ class TipoHabitacionController extends Controller
         return view('tipos.create');
     }
 
-    public function store(Request $request) {
-        TipoHabitacion::create($request->all());
-        return redirect()->route('tipos.index');
-    }
+  public function store(Request $request) {
+    $request->validate([
+        'nombre_tipo' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'descripcion' => ['nullable', 'string'],
+    ]);
+
+    TipoHabitacion::create($request->all());
+
+    return redirect()->route('tipos.index')
+                     ->with('success', 'Tipo de habitación creado correctamente.');
+}
 
     public function edit($id) {
         $tipo = TipoHabitacion::findOrFail($id);
         return view('tipos.edit', compact('tipo'));
     }
 
-    public function update(Request $request, $id) {
-        $tipo = TipoHabitacion::findOrFail($id);
-        $tipo->update($request->all());
-        return redirect()->route('tipos.index');
-    }
+ public function update(Request $request, $id) {
+    $request->validate([
+        'nombre_tipo' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'descripcion' => ['nullable', 'string'],
+    ]);
+
+    $tipo = TipoHabitacion::findOrFail($id);
+    $tipo->update($request->all());
+
+    return redirect()->route('tipos.index')
+                     ->with('success', 'Tipo de habitación actualizado correctamente.');
+}
 
     public function destroy($id) {
         TipoHabitacion::destroy($id);

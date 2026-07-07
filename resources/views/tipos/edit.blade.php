@@ -11,14 +11,16 @@
             @csrf
             @method('PUT')
 
-            <!-- Nombre del tipo -->
-            <div class="mb-4">
-                <label for="nombre_tipo" class="block text-sm font-medium text-gray-300">Nombre del tipo</label>
-                <input type="text" name="nombre_tipo" id="nombre_tipo" 
-                       value="{{ old('nombre_tipo', $tipo->nombre_tipo) }}"
-                       class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                       required>
-            </div>
+                       <!-- Nombre del tipo -->
+<div class="mb-4">
+    <label for="nombre_tipo" class="block text-sm font-medium text-gray-300">Nombre del tipo</label>
+    <input type="text" name="nombre_tipo" id="nombre_tipo" 
+           value="{{ old('nombre_tipo', $tipo->nombre_tipo ?? '') }}"
+           pattern="[A-Za-z\s]+"
+           onkeypress="return /[a-zA-Z\s]/.test(event.key)"
+           class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500" 
+           required>
+</div>
 
             <!-- Descripción -->
             <div class="mb-6">

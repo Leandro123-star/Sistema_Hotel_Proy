@@ -37,10 +37,20 @@ class EmpleadoController extends Controller
     }
 
     public function update(Request $request, $id) {
-        $empleado = Empleado::findOrFail($id);
-        $empleado->update($request->all());
-        return redirect()->route('empleados.index');
-    }
+    $empleado = Empleado::findOrFail($id);
+
+    $request->validate([
+        'nombre' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'apellido' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'cargo' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'telefono' => ['required', 'regex:/^[0-9]+$/'],
+    ]);
+
+    $empleado->update($request->all());
+
+    return redirect()->route('empleados.index')
+                     ->with('success', 'Empleado actualizado correctamente.');
+}
 
     public function destroy($id) {
         Empleado::destroy($id);
