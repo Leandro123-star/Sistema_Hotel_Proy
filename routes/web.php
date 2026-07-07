@@ -11,9 +11,10 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ReservaHabitacionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/panel', [PanelController::class, 'index'])->name('panel');
@@ -26,5 +27,9 @@ Route::resource('empleados', EmpleadoController::class);
 Route::resource('reserva_habitacion', ReservaHabitacionController::class);
 Route::resource('usuarios', UsuarioController::class)
     ->middleware('checkrole');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 
