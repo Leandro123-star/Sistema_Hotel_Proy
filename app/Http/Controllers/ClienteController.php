@@ -28,11 +28,20 @@ class ClienteController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index')
-                         ->with('success','Cliente registrado correctamente');
-    }
+{
+    $request->validate([
+        'nombre' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'apellido' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'ci' => ['required', 'unique:clientes,ci'],
+        'telefono' => ['nullable'],
+    ]);
+
+    Cliente::create($request->all());
+
+    return redirect()->route('clientes.index')
+                     ->with('success', 'Cliente creado correctamente.');
+}
+
 
     /**
      * Display the specified resource.

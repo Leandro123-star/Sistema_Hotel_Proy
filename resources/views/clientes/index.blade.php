@@ -24,7 +24,6 @@
                 <th class="px-4 py-2 text-left">APELLIDO</th>
                 <th class="px-4 py-2 text-left">CI</th>
                 <th class="px-4 py-2 text-left">TELÉFONO</th>
-                <th class="px-4 py-2 text-left">EMAIL</th>
                 <th class="px-4 py-2 text-left">ACCIONES</th>
             </tr>
         </thead>
@@ -36,7 +35,6 @@
                 <td class="px-4 py-2">{{ $cliente->apellido }}</td>
                 <td class="px-4 py-2">{{ $cliente->ci }}</td>
                 <td class="px-4 py-2">{{ $cliente->telefono }}</td>
-                <td class="px-4 py-2">{{ $cliente->email }}</td>
                 <td class="px-4 py-2 space-x-2">
                     <a href="{{ route('clientes.edit', $cliente->id_cliente) }}" 
                        class="bg-blue-500 px-3 py-1 rounded text-white hover:bg-blue-400">Editar</a>
