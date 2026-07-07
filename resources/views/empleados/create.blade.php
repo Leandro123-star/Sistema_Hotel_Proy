@@ -11,40 +11,47 @@
             @csrf
 
             <!-- Nombre-->
-            <div class="mb-4">
-                <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre</label>
-                <input type="text" name="nombre" id="nombre" 
-                       class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                       required>
-            </div>
+<div class="mb-4">
+    <label for="nombre" class="block text-sm font-medium text-gray-300">Nombre</label>
+    <input type="text" name="nombre" id="nombre"
+           pattern="[A-Za-z\s]+"
+           onkeypress="return /[a-zA-Z\s]/.test(event.key)"
+           class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500"
+           required>
+</div>
 
-             <!-- Apellido -->
-            <div class="mb-4">
-                <label for="apellido" class="block text-sm font-medium text-gray-300">Apellido</label>
-                <input type="text" name="apellido" id="apellido" 
-                       class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                       required>
-            </div>
+<!-- Apellido -->
+<div class="mb-4">
+    <label for="apellido" class="block text-sm font-medium text-gray-300">Apellido</label>
+    <input type="text" name="apellido" id="apellido"
+           pattern="[A-Za-z\s]+"
+           onkeypress="return /[a-zA-Z\s]/.test(event.key)"
+           class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500"
+           required>
+</div>
 
-            <!-- Cargo -->
-            <div class="mb-4">
-                <label for="cargo" class="block text-sm font-medium text-gray-300">Cargo</label>
-                <select name="cargo" id="cargo" 
-                        class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500" 
-                        required>
-                    <option value="Recepcionista">Recepcionista</option>
-                    <option value="Gerente">Gerente</option>
-                    <option value="Ama de llaves">Ama de llaves</option>
-                    <option value="Mantenimiento">Mantenimiento</option>
-                </select>
-            </div>
+<!-- Cargo -->
+<div class="mb-4">
+    <label for="cargo" class="block text-sm font-medium text-gray-300">Cargo</label>
+    <select name="cargo" id="cargo"
+            class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500"
+            required>
+        <option value="Recepcionista">Recepcionista</option>
+        <option value="Gerente">Gerente</option>
+        <option value="Ama de llaves">Ama de llaves</option>
+        <option value="Mantenimiento">Mantenimiento</option>
+    </select>
+</div>
 
-            <!-- Teléfono -->
-            <div class="mb-6">
-                <label for="telefono" class="block text-sm font-medium text-gray-300">Teléfono</label>
-                <input type="text" name="telefono" id="telefono" 
-                       class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500">
-            </div>
+<!-- Teléfono -->
+<div class="mb-6">
+    <label for="telefono" class="block text-sm font-medium text-gray-300">Teléfono</label>
+    <input type="text" name="telefono" id="telefono"
+           pattern="[0-9]+"
+           onkeypress="return /[0-9]/.test(event.key)"
+           class="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 text-white px-3 py-2 focus:ring-yellow-500 focus:border-yellow-500"
+           required>
+</div>
 
             <!-- Botones -->
             <div class="flex justify-end space-x-3">

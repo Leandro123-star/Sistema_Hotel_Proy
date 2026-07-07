@@ -3,6 +3,34 @@
 @section('content')
     <h1 class="text-yellow-400 text-3xl font-bold mb-4">Clientes</h1>
     <p class="mb-4">{{ count($clientes) }} huéspedes registrados</p>
+     <!--Mensaje al guardar-->
+     @if(session('success'))
+    <div id="success-message" 
+         class="flex items-center bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg mb-4 animate-bounce">
+        <!-- Ícono -->
+        <svg class="w-6 h-6 mr-2 text-white" fill="none" stroke="currentColor" stroke-width="2" 
+             viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  d="M9 12l2 2l4-4m6 2a9 9 0 11-18 0a9 9 0 0118 0z" />
+        </svg>
+        <!-- Texto -->
+        <span class="font-semibold">{{ session('success') }}</span>
+    </div>
+
+    <script>
+        // Desaparece con efecto fade después de 3 segundos
+        setTimeout(function() {
+            let msg = document.getElementById('success-message');
+            if (msg) {
+                msg.style.transition = "opacity 1s ease";
+                msg.style.opacity = "0";
+                setTimeout(() => msg.style.display = "none", 1000);
+            }
+        }, 2000);
+    </script>
+@endif
+
+
 
     <a href="{{ route('clientes.create') }}" 
        class="bg-yellow-400 text-gray-900 px-4 py-2 rounded font-semibold hover:bg-yellow-300">

@@ -20,15 +20,17 @@ class UsuarioController extends Controller
     }
 
     public function store(Request $request) {
-        Usuario::create([
-            'id_empleado' => $request->id_empleado,
-            'usuario' => $request->usuario,
-            'contraseña' => bcrypt($request->contraseña),
-            'rol' => $request->rol,
-            'estado' => $request->estado,
-        ]);
-        return redirect()->route('usuarios.index');
-    }
+    Usuario::create([
+        'id_empleado' => $request->id_empleado,
+        'usuario' => $request->usuario,
+        'contraseña' => bcrypt($request->contraseña),
+        'rol' => $request->rol,
+        'estado' => $request->estado,
+    ]);
+
+    return redirect()->route('usuarios.index')
+                     ->with('success', 'Usuario Creado Exitosamente.');
+}
 
     public function edit($id) {
         $usuario = Usuario::findOrFail($id);
@@ -37,16 +39,18 @@ class UsuarioController extends Controller
     }
 
     public function update(Request $request, $id) {
-        $usuario = Usuario::findOrFail($id);
-        $usuario->update([
-            'id_empleado' => $request->id_empleado,
-            'usuario' => $request->usuario,
-            'contraseña' => bcrypt($request->contraseña),
-            'rol' => $request->rol,
-            'estado' => $request->estado,
-        ]);
-        return redirect()->route('usuarios.index');
-    }
+    $usuario = Usuario::findOrFail($id);
+    $usuario->update([
+        'id_empleado' => $request->id_empleado,
+        'usuario' => $request->usuario,
+        'contraseña' => bcrypt($request->contraseña),
+        'rol' => $request->rol,
+        'estado' => $request->estado,
+    ]);
+
+    return redirect()->route('usuarios.index')
+                     ->with('success', 'Usuario Actualizado Exitosamente.');
+}
 
     public function destroy($id) {
         Usuario::destroy($id);

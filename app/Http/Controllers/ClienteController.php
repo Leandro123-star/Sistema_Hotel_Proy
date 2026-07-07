@@ -32,8 +32,8 @@ class ClienteController extends Controller
     $request->validate([
         'nombre' => ['required', 'regex:/^[A-Za-z\s]+$/'],
         'apellido' => ['required', 'regex:/^[A-Za-z\s]+$/'],
-        'ci' => ['required', 'unique:clientes,ci'],
-        'telefono' => ['nullable'],
+        'ci' => ['required', 'regex:/^[0-9]+$/', 'unique:clientes,ci'],
+        'telefono' => ['nullable', 'regex:/^[0-9]+$/'],
     ]);
 
     Cliente::create($request->all());
@@ -63,13 +63,23 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-         $cliente = Cliente::findOrFail($id);
-        $cliente->update($request->all());
-        return redirect()->route('clientes.index')
-                         ->with('success','Cliente actualizado correctamente');
-    }
+   public function update(Request $request, string $id)
+{
+    $cliente = Cliente::findOrFail($id);
+
+    $request->validate([
+        'nombre' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'apellido' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'ci' => ['required', 'regex:/^[0-9]+$/', 'unique:clientes,ci,'.$cliente->id_cliente.',id_cliente'],
+        'telefono' => ['nullable', 'regex:/^[0-9]+$/'],
+    ]);
+
+    $cliente->update($request->all());
+
+    return redirect()->route('clientes.index')
+                     ->with('success','Cliente actualizado correctamente.');
+}
+
 
     /**
      * Remove the specified resource from storage.

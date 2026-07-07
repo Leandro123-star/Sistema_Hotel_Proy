@@ -16,10 +16,20 @@ class EmpleadoController extends Controller
         return view('empleados.create');
     }
 
-    public function store(Request $request) {
-        Empleado::create($request->all());
-        return redirect()->route('empleados.index');
-    }
+    public function store(Request $request)
+{
+    $request->validate([
+        'nombre' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'apellido' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'cargo' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+        'telefono' => ['required', 'regex:/^[0-9]+$/'],
+    ]);
+
+    Empleado::create($request->all());
+
+    return redirect()->route('empleados.index')
+                     ->with('success', 'Empleado creado correctamente.');
+}
 
     public function edit($id) {
         $empleado = Empleado::findOrFail($id);

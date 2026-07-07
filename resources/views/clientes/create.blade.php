@@ -28,21 +28,25 @@
            required>
 </div>
 
-        <!-- CI / Documento -->
-        <div>
-            <label class="block text-sm font-medium text-gray-200">CI / Documento</label>
-            <input type="text" name="ci" 
-                   class="w-full px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400" 
-                   required>
-        </div>
+       <!-- CI / Documento -->
+<div>
+    <label class="block text-sm font-medium text-gray-200">CI / Documento</label>
+    <input type="text" name="ci"
+           pattern="[0-9]+"
+           onkeypress="return /[0-9]/.test(event.key)"
+           class="w-full px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+           required>
+</div>
 
-        <!-- Teléfono -->
-        <div>
-            <label class="block text-sm font-medium text-gray-200">Teléfono</label>
-            <input type="text" name="telefono" 
-                   class="w-full px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400" 
-                   required>
-        </div>
+<!-- Teléfono -->
+<div>
+    <label class="block text-sm font-medium text-gray-200">Teléfono</label>
+    <input type="text" name="telefono"
+           pattern="[0-9]+"
+           onkeypress="return /[0-9]/.test(event.key)"
+           class="w-full px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+           required>
+</div>
 
         <!-- Botones -->
         <div class="flex justify-end space-x-3">
