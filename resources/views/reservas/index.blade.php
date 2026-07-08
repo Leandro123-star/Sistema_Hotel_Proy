@@ -52,13 +52,7 @@
                            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm mr-2">
                            Editar
                         </a>
-                        <form action="{{ route('reservas.destroy', $reserva->id_reserva) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm">
-                                Eliminar
-                            </button>
-                        </form>
+                        
                     </td>
                 </tr>
                 @empty
